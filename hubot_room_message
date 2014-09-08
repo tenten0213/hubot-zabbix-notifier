@@ -1,0 +1,71 @@
+#!/bin/bash
+
+###############################################################################
+#
+# ./hubot_room_message
+#
+# A script for sending a system message to a room through a hubot.
+#
+# Docs: http://github.com/tenten0213/hubot-zabbix-notifier/README.md
+#
+# Usage:
+#   cat message.txt | ./hubot_room_message -r 1234 -o example.com
+#   echo -e "New\nline" | ./hubot_room_message -r 1234 -o example.com
+#
+###############################################################################
+
+# exit on failure
+set -e
+
+usage() {
+  cat << EOF
+Usage: $0 -r <room id> -o <host>
+
+This script will read from stdin and send the contents to the given room as
+a system message.
+
+OPTIONS:
+   -h             Show this message
+   -r <room id>   Room ID
+   -o <host>      Hubot host
+   -p <port>      Optional: Hubot port (default: 8080)
+   -i <input>     Optional: Input to send to room (default: stdin)
+EOF
+}
+
+while getopts “h:r:o:p:i::” OPTION; do
+  case $OPTION in
+    h) usage; exit 1;;
+    r) ROOM_ID=$OPTARG;;
+    o) HOST=$OPTARG;;
+    p) PORT=$OPTARG;;
+    i) INPUT=$OPTARG;;
+    [?]) usage; exit;;
+  esac
+done
+
+# check for required args
+if [[ -z $ROOM_ID ]] || [[ -z $HOST ]]; then
+  usage
+  exit 1
+fi
+
+if [ -z "$INPUT" ]; then
+  # read stdin
+  INPUT=$(cat)
+fi
+
+if [ -z "$PORT" ]; then
+  PORT=8080
+fi
+
+# urlencode with perl
+INPUT=$(echo -n "${INPUT}" | perl -p -e 's/([^A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg')
+
+# do the curl
+curl -sS \
+  -H 'Content-type: application/json' \
+  -X POST \
+  -d "{\"message\":\"$INPUT\"}" \
+  http://$HOST:$PORT/hubot/zabbix-notify?room=$ROOM_ID
+

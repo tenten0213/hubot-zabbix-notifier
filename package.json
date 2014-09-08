@@ -1,0 +1,47 @@
+{
+  "name": "hubot-zabbix-notifier",
+  "description": "Notifies about Zabbix alerts via Zabbix Action - Remote command",
+  "version": "0.0.1",
+  "homepage": "https://github.com/tenten0213/hubot-zabbix-notifier",
+  "author": {
+    "name": "Takehito Amanuma",
+    "email": "takehito.0213@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tenten0213/hubot-zabbix-notifier.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tenten0213/hubot-zabbix-notifier/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/tenten0213/hubot-zabbix-notifier/blob/master/LICENSE"
+    }
+  ],
+  "main": "src/scripts/hubot-zabbix-notifier",
+  "scripts": {
+    "test": "grunt simplemocha"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-simple-mocha": "~0.4.0",
+    "should": "~3.1.2",
+    "grunt": "~0.4.2",
+    "supertest": "~0.9.0",
+    "sinon": "~1.8.2",
+    "hubot": "~2.6.4",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-jshint": "~0.8.0"
+  },
+  "keywords": [
+    "hubot"
+  ],
+  "dependencies": {},
+  "readme": "hubot-zabbix-notifier",
+  "readmeFilename": "README.md"
+}

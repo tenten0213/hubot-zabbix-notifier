@@ -33,7 +33,7 @@ OPTIONS:
 EOF
 }
 
-while getopts “h:r:o:p:i::” OPTION; do
+while getopts “h:r:o:p:i:” OPTION; do
   case $OPTION in
     h) usage; exit 1;;
     r) ROOM_ID=$OPTARG;;

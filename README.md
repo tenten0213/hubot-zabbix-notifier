@@ -15,3 +15,6 @@ Notifies about Zabbix alerts
 
 ## License
 Licensed under the MIT license.
+
+This script created with reference to the [halkeye/hubot-jenkins-notifier](https://github.com/halkeye/hubot-jenkins-notifier) and [hipchat/hipchat-cli](https://github.com/hipchat/hipchat-cli). And these are under the MIT license.
+
